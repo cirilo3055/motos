@@ -61,7 +61,6 @@
 
 <div class="produtos">
 
-  <!-- REQUISITO 2: Card do Bootstrap com imagem, título e botão -->
   <div class="card">
     <img src="https://images5.1000ps.net/images_bikekat/2024/2-Honda/9895-CRF1100L_Africa_Twin/005-638405695830399400-honda-crf1100l-africa-twin.jpg?format=webp&quality=80&scale=both&width=992&height=558&bgcolor=rgba_39_42_44_0&mode=pad" class="card-img-top" alt="Africa Twin">
     <div class="card-body">
@@ -128,8 +127,9 @@
     </div>
   </div>
 
+  <!-- CARD SAHARA COM A IMAGEM NOVA -->
   <div class="card">
-    <img src="https://motos2025.com.br/wp-content/uploads/2024/05/1_honda-xre-300-sahara.jpg" class="card-img-top" alt="Sahara 300">
+    <img src="saharaaa.jfif" class="card-img-top" alt="Sahara 300">
     <div class="card-body">
       <h5 class="card-title">Honda Sahara 300</h5>
       <p class="card-text">2025 • 0km • Trail</p>
@@ -159,31 +159,21 @@
   <p>© 2026 Raposo Motos - Todos os direitos reservados</p>
 </footer>
 
-<!-- REQUISITO 1: Bootstrap JS via CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // MODO NOTURNO - BOTÃO ENGENRENAGEM
   const btnTema = document.getElementById('btn-tema');
-
-  // Se já tinha deixado no noturno antes, já abre nele
   if (localStorage.getItem('tema') === 'noturno') {
     document.body.classList.add('modo-noturno');
     btnTema.textContent = '☀️';
   }
-
   btnTema.addEventListener('click', () => {
     document.body.classList.toggle('modo-noturno');
     const noturno = document.body.classList.contains('modo-noturno');
-
-    // Troca o ícone da engrenagem
-    btnTema.textContent = noturno ? '☀️' : '⚙️';
-
-    // Salva a escolha pra não perder quando recarregar
+    btnTema.textContent = noturno ? '☀️' : '🌑';
     localStorage.setItem('tema', noturno ? 'noturno' : 'claro');
   });
 
-  // REQUISITO 3: addEventListener que muda texto e cor do card
   document.querySelectorAll('.btn-oferta').forEach(botao => {
     botao.addEventListener('click', () => {
       const card = botao.closest('.card');
@@ -191,7 +181,6 @@
       const texto = card.querySelector('.card-text');
       const preco = card.querySelector('.preco');
       const ativado = card.classList.contains('bg-dark');
-
       if (!ativado) {
         card.classList.add('bg-dark', 'text-white');
         titulo.textContent = '🔥 OFERTA! ' + titulo.textContent.replace('🔥 OFERTA! ', '');
@@ -211,7 +200,6 @@
     });
   });
 
-  // FINANCIAMENTO 10% + WHATSAPP COM NOME
   document.querySelectorAll('.btn-financiar').forEach(botao => {
     botao.addEventListener('click', () => {
       const card = botao.closest('.card');
@@ -219,26 +207,21 @@
       const precoTexto = card.querySelector('.preco').textContent;
       const resultado = card.querySelector('.resultado');
       const nome = card.querySelector('.nome').value.trim() || 'Cliente';
-
       const preco = Number(precoTexto.replace('R$', '').replace(/\./g, '').trim());
       const entrada = Number(card.querySelector('.entrada').value) || 0;
       const vezes = Number(card.querySelector('.parcelas').value);
-
       if (entrada >= preco) {
         resultado.classList.remove('d-none');
         resultado.innerHTML = '⚠️ A entrada não pode ser maior que o preço da moto!';
         return;
       }
-
       const financiado = preco - entrada;
       const juros = financiado * 0.10;
       const total = financiado + juros + entrada;
       const parcela = (financiado + juros) / vezes;
       const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
       const msg = `Olá Raposo Motos! 🏍️%0A%0AMeu nome é *${encodeURIComponent(nome)}*%0AQuero financiar:%0A%0A*${encodeURIComponent(nomeMoto)}*%0AValor: ${encodeURIComponent(fmt(preco))}%0AEntrada: ${encodeURIComponent(fmt(entrada))}%0AJuros: 10% (${encodeURIComponent(fmt(juros))})%0ATotal: ${encodeURIComponent(fmt(total))}%0A%0A*${vezes}x de ${encodeURIComponent(fmt(parcela))}*%0A%0APode confirmar se está disponível?`;
       const link = `https://wa.me/5561940028922?text=${msg}`;
-
       resultado.classList.remove('d-none');
       resultado.innerHTML = `
         <b>Valor:</b> ${fmt(preco)}<br>
@@ -253,3 +236,4 @@
 </script>
 </body>
 </html>
+
